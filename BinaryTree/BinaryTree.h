@@ -2,27 +2,16 @@
 #include "TreeBase.h"
 
 template<typename T>
-class Node : INode
+class BTree : IBTree<T>
 {
 public:
-	T getData() const;
-	int getDepth() const;
+	IBTree<T> *getLeftChild() const;
+	IBTree<T> *getRightChild() const;
+	INode<T> *getNode() const;
+	bool insertNode(INode<T> *ipNode);
 
 private:
-	T _data;
-	int _depth;
-};
-
-template<typename T>
-class BTree : ITree
-{
-public:
-	virtual ITree *getLeftChild() const;
-	virtual ITree *getRightChild() const;
-	virtual INode *getNode() const;
-
-private:
-	ITree *_left;
-	ITree *_right;
-	INode *_node;
+	IBTree<T> *_left;
+	IBTree<T> *_right;
+	INode<T> *_node;
 };

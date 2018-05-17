@@ -1,33 +1,29 @@
 #include "BinaryTree.h"
 
-// Implementation for Node methods
-template<typename T>
-inline T Node<T>::getData() const
-{
-	return T();
-}
-
-template<typename T>
-inline int Node<T>::getDepth() const
-{
-	return _depth;
-}
-
+//------------------------------------------------------------------
 // Implementation for BTree methods
+//------------------------------------------------------------------
 template<typename T>
-inline ITree * BTree<T>::getLeftChild() const
+inline IBTree<T> * BTree<T>::getLeftChild() const
 {
 	return _left;
 }
 
 template<typename T>
-inline ITree * BTree<T>::getRightChild() const
+inline IBTree<T> * BTree<T>::getRightChild() const
 {
 	return _right;
 }
 
 template<typename T>
-inline INode * BTree<T>::getNode() const
+inline INode<T> * BTree<T>::getNode() const
 {
 	return _node;
 }
+
+template<typename T>
+bool BTree<T>::insertNode(INode<T> *ipNode)
+{
+	return false;
+}
+//------------------------------------------------------------------

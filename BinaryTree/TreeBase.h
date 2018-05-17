@@ -5,23 +5,16 @@ class INode
 {
 public:
 	virtual T getData() const = 0;
+	virtual void setData(const INode *ipNode) = 0;
 	virtual int getDepth() const = 0;
-
-private:
-	T _data;
-	int _depth;
 };
 
 template<typename T>
-class ITree
+class IBTree
 {
 public:
-	virtual ITree *getLeftChild() const = 0;
-	virtual ITree *getRightChild() const = 0;
-	virtual INode *getNode() const = 0;
-
-private:
-	ITree *_left;
-	ITree *_right;
-	INode *_node;
+	virtual IBTree<T> *getLeftChild() const = 0;
+	virtual IBTree<T> *getRightChild() const = 0;
+	virtual INode<T> *getNode() const = 0;
+	virtual bool insertNode(INode<T> *ipNode) = 0;
 };
