@@ -28,13 +28,13 @@ void BTree<T>::insertNode(INode<T> *ipNode)
 	if (_node == nullptr) {
 		_node = ipNode;
 	}
-	else if (ipNode < _node) {
+	else if (ipNode -> operator<(_node)) {
 		if (_left == nullptr) {
 			_left = new BTree<T>();
 		}
 		_left->insertNode(ipNode);
 	}
-	else if (ipNode > _node) {
+	else {
 		if (_right == nullptr) {
 			_right = new BTree<T>();
 		}

@@ -38,41 +38,36 @@ Node<T>::~Node()
 	}
 }
 
+template<typename T>
+bool Node<T>::operator>(const INode<T>* n2)
+{
+	return _p_data > n2->getData();
+}
+
+template<typename T>
+bool Node<T>::operator<(const INode<T>* n2)
+{
+	return _p_data < n2->getData();
+}
+
+template<typename T>
+bool Node<T>::operator<=(const INode<T>* n2)
+{
+	return _p_data <= n2->getData();
+}
+
+template<typename T>
+bool Node<T>::operator>=(const INode<T>* n2)
+{
+	return _p_data >= n2->getData();
+}
+
+template<typename T>
+bool Node<T>::operator==(const INode<T>* n2)
+{
+	return _p_data == n2->getData();
+}
+
 // Specialize to 'int' by default
 template class Node<int>;
-//------------------------------------------------------------------
-
-
-//------------------------------------------------------------------
-// Global relational operators for Node class
-//------------------------------------------------------------------
-template<typename T>
-bool operator>(const INode<T>& n1, const INode<T>& n2)
-{
-	return n1._data > n2._data;
-}
-
-template<typename T>
-bool operator<(const INode<T>& n1, const INode<T>& n2)
-{
-	return n1._data < n2._data;
-}
-
-template<typename T>
-bool operator<=(const INode<T>& n1, const INode<T>& n2)
-{
-	return n1._data <= n2._data;
-}
-
-template<typename T>
-bool operator>=(const INode<T>& n1, const INode<T>& n2)
-{
-	return n1._data >= n2._data;
-}
-
-template<typename T>
-bool operator==(const INode<T>& n1, const INode<T>& n2)
-{
-	return n1._data == n2._data;
-}
 //------------------------------------------------------------------

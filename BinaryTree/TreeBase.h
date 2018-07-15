@@ -7,6 +7,12 @@ public:
 	virtual T *getData() const = 0;
 	virtual void setData(const T *ipNode) = 0;
 	virtual int getDepth() const = 0;
+
+	virtual bool operator >  (const INode<T> *n2) = 0;
+	virtual bool operator <  (const INode<T> *n2) = 0;
+	virtual bool operator <= (const INode<T> *n2) = 0;
+	virtual bool operator >= (const INode<T> *n2) = 0;
+	virtual bool operator == (const INode<T> *n2) = 0;
 };
 
 template<typename T>
