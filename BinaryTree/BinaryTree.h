@@ -2,13 +2,14 @@
 #include "TreeBase.h"
 
 template<typename T>
-class BTree : IBTree<T>
+class BTree : public IBTree<T>
 {
 public:
 	IBTree<T> *getLeftChild() const;
 	IBTree<T> *getRightChild() const;
 	INode<T> *getNode() const;
-	bool insertNode(INode<T> *ipNode);
+	void insertNode(INode<T> *ipNode);
+	void inorderTraverse();
 
 private:
 	IBTree<T> *_left;
