@@ -1,10 +1,6 @@
 #include "BinaryTree.h"
 #include <iostream>
 
-#ifdef DEBUG
-#include <Windows.h>
-#endif
-
 //------------------------------------------------------------------
 // Implementation for BTree methods
 //------------------------------------------------------------------
@@ -89,7 +85,7 @@ BTree<T>::~BTree()
 #ifdef DEBUG
 	_CrtMemState s1, s2, s3;
 	_CrtMemCheckpoint(&s1);
-	OutputDebugString("Checking for memory leaks...\n");
+	TRACE("Checking for memory leaks...", __FILENAME__, __LINE__, __FUNCTION__);
 #endif // DEBUG
 
 	deleteAllNodes();
@@ -99,7 +95,7 @@ BTree<T>::~BTree()
 	if (_CrtMemDifference(&s3, &s1, &s2)) {
 		_CrtDumpMemoryLeaks();
 	}
-	OutputDebugString("Check Finished...\n");
+	TRACE("Check Finished...", __FILENAME__, __LINE__, __FUNCTION__);
 #endif // DEBUG
 
 }

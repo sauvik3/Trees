@@ -3,6 +3,10 @@
 
 #define DEBUG
 
+#ifdef DEBUG
+#include "trace.h"
+#endif
+
 template<typename T>
 class BTree : public IBTree<T>
 {
