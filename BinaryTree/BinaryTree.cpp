@@ -33,17 +33,20 @@ void BTree<T>::insertNode(const T &iData)
 	if (_pNode == nullptr) {
 		_pNode = pNewNode;
 	}
-	else if (*pNewNode < *_pNode) {
-		if (_left == nullptr) {
-			_left = new BTree<T>();
-		}
-		_left->insertNode(iData);
-	}
 	else {
-		if (_right == nullptr) {
-			_right = new BTree<T>();
+		if (*pNewNode < *_pNode) {
+			if (_left == nullptr) {
+				_left = new BTree<T>();
+			}
+			_left->insertNode(iData);
 		}
-		_right->insertNode(iData);
+		else {
+			if (_right == nullptr) {
+				_right = new BTree<T>();
+			}
+			_right->insertNode(iData);
+		}
+		delete pNewNode;
 	}
 }
 
@@ -86,7 +89,7 @@ BTree<T>::~BTree()
 #ifdef DEBUG
 	_CrtMemState s1, s2, s3;
 	_CrtMemCheckpoint(&s1);
-	OutputDebugString("\nChecking for memory leaks...\n");
+	OutputDebugString("Checking for memory leaks...\n");
 #endif // DEBUG
 
 	deleteAllNodes();
@@ -96,7 +99,7 @@ BTree<T>::~BTree()
 	if (_CrtMemDifference(&s3, &s1, &s2)) {
 		_CrtDumpMemoryLeaks();
 	}
-	OutputDebugString("\nCheck Finished...\n");
+	OutputDebugString("Check Finished...\n");
 #endif // DEBUG
 
 }
