@@ -4,18 +4,15 @@
 // Implementation for Node methods
 //------------------------------------------------------------------
 template<typename T>
-inline T * Node<T>::getData() const
+inline T Node<T>::getData() const
 {
-	return _p_data;
+	return _data;
 }
 
 template<typename T>
-void Node<T>::setData(const T *ipData)
+void Node<T>::setData(const T &iData)
 {
-	if (_p_data != nullptr) {
-		delete _p_data;
-	}
-	_p_data = new T(*ipData);
+	_data = iData;
 }
 
 template<typename T>
@@ -25,47 +22,36 @@ inline int Node<T>::getDepth() const
 }
 
 template<typename T>
-Node<T>::Node(T iData) : _depth(0)
+Node<T>::Node(const T &iData) : _depth(0), _data(iData) { }
+
+template<typename T>
+bool Node<T>::operator>(const Node<T> &n2)
 {
-	_p_data = new T(iData);
+	return this->getData() > n2.getData();
 }
 
 template<typename T>
-Node<T>::~Node()
+bool Node<T>::operator<(const Node<T> &n2)
 {
-	if (_p_data != nullptr) {
-		delete _p_data;
-	}
+	return this->getData() < n2.getData();
 }
 
 template<typename T>
-bool Node<T>::operator>(const INode<T>* n2)
+bool Node<T>::operator<=(const Node<T> &n2)
 {
-	return _p_data > n2->getData();
+	return this->getData() <= n2.getData();
 }
 
 template<typename T>
-bool Node<T>::operator<(const INode<T>* n2)
+bool Node<T>::operator>=(const Node<T> &n2)
 {
-	return _p_data < n2->getData();
+	return this->getData() >= n2.getData();
 }
 
 template<typename T>
-bool Node<T>::operator<=(const INode<T>* n2)
+bool Node<T>::operator==(const Node<T> &n2)
 {
-	return _p_data <= n2->getData();
-}
-
-template<typename T>
-bool Node<T>::operator>=(const INode<T>* n2)
-{
-	return _p_data >= n2->getData();
-}
-
-template<typename T>
-bool Node<T>::operator==(const INode<T>* n2)
-{
-	return _p_data == n2->getData();
+	return this->getData() == n2.getData();
 }
 
 // Specialize to 'int' by default

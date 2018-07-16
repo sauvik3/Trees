@@ -1,6 +1,10 @@
 #include "BinaryTree.h"
 #include <iostream>
 
+#ifdef DEBUG
+#include <Windows.h>
+#endif
+
 //------------------------------------------------------------------
 // Implementation for BTree methods
 //------------------------------------------------------------------
@@ -17,28 +21,29 @@ inline IBTree<T> * BTree<T>::getRightChild() const
 }
 
 template<typename T>
-inline INode<T> * BTree<T>::getNode() const
+inline Node<T> *BTree<T>::getNode() const
 {
-	return _node;
+	return _pNode;
 }
 
 template<typename T>
-void BTree<T>::insertNode(INode<T> *ipNode)
+void BTree<T>::insertNode(const T &iData)
 {
-	if (_node == nullptr) {
-		_node = ipNode;
+	Node<T> *pNewNode = new Node<T>(iData);
+	if (_pNode == nullptr) {
+		_pNode = pNewNode;
 	}
-	else if (ipNode -> operator<(_node)) {
+	else if (*pNewNode < *_pNode) {
 		if (_left == nullptr) {
 			_left = new BTree<T>();
 		}
-		_left->insertNode(ipNode);
+		_left->insertNode(iData);
 	}
 	else {
 		if (_right == nullptr) {
 			_right = new BTree<T>();
 		}
-		_right->insertNode(ipNode);
+		_right->insertNode(iData);
 	}
 }
 
@@ -48,12 +53,52 @@ void BTree<T>::inorderTraverse()
 	if (_left != nullptr) {
 		_left->inorderTraverse();
 	}
-	if (_node != nullptr) {
-		std::cout << *_node->getData() << std::endl;
+	if (_pNode != nullptr) {
+		std::cout << _pNode->getData() << std::endl;
 	}
 	if (_right != nullptr) {
 		_right->inorderTraverse();
 	}
+}
+
+template<typename T>
+void BTree<T>::deleteAllNodes()
+{
+	if (_left != nullptr) {
+		_left->deleteAllNodes();
+		delete _left;
+		_left = nullptr;
+	}
+	if (_pNode != nullptr) {
+		delete _pNode;
+		_pNode = nullptr;
+	}
+	if (_right != nullptr) {
+		_right->deleteAllNodes();
+		delete _right;
+		_right = nullptr;
+	}
+}
+
+template<typename T>
+BTree<T>::~BTree()
+{
+#ifdef DEBUG
+	_CrtMemState s1, s2, s3;
+	_CrtMemCheckpoint(&s1);
+	OutputDebugString("\nChecking for memory leaks...\n");
+#endif // DEBUG
+
+	deleteAllNodes();
+
+#ifdef DEBUG
+	_CrtMemCheckpoint(&s2);
+	if (_CrtMemDifference(&s3, &s1, &s2)) {
+		_CrtDumpMemoryLeaks();
+	}
+	OutputDebugString("\nCheck Finished...\n");
+#endif // DEBUG
+
 }
 
 // Specialize to 'int' by default
