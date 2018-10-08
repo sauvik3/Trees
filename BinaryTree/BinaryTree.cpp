@@ -85,7 +85,7 @@ BTree<T>::~BTree()
 #ifdef DEBUG
 	_CrtMemState s1, s2, s3;
 	_CrtMemCheckpoint(&s1);
-	TRACE("Checking for memory leaks...", __FILENAME__, __LINE__, __FUNCTION__);
+	TRACE("Checking for memory leaks...");
 #endif // DEBUG
 
 	deleteAllNodes();
@@ -95,7 +95,7 @@ BTree<T>::~BTree()
 	if (_CrtMemDifference(&s3, &s1, &s2)) {
 		_CrtDumpMemoryLeaks();
 	}
-	TRACE("Check Finished...", __FILENAME__, __LINE__, __FUNCTION__);
+	TRACE("Check Finished...");
 #endif // DEBUG
 
 }

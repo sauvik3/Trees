@@ -14,9 +14,16 @@ bool _trace(TCHAR *format, ...)
 	return true;
 }
 
-bool _formatTrace(TCHAR *msg, TCHAR *file, int line, TCHAR *func)
+bool _formatTrace(TCHAR *file, int line, TCHAR *func, TCHAR *format, ...)
 {
-	TCHAR str[22];
+	TCHAR str[111];
+	TCHAR buffer[1000];
+	va_list argptr;
+
 	wsprintf(str, "%s(%d)", file, line);
-	return _trace("%-21s : %-40s [%s()]\n", str, msg, func);
+	va_start(argptr, format);
+	wvsprintf(buffer, format, argptr);
+	va_end(argptr);
+
+	return _trace("%-21s : %-40s [%s()]\n", str, buffer, func);
 }

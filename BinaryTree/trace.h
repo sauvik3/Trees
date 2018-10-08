@@ -5,5 +5,6 @@
 
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 bool _trace(TCHAR *format, ...);
-bool _formatTrace(TCHAR *msg, TCHAR *file, int line, TCHAR *func);
-#define TRACE _formatTrace
+bool _formatTrace(TCHAR *file, int line, TCHAR *func, TCHAR *format, ...);
+
+#define TRACE(format, ...) _formatTrace(__FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__)
